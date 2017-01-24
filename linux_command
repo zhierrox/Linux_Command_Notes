@@ -1,3 +1,5 @@
+The kernel of UNIX is the hub of the operating system: 
+it allocates time and memory to programs and handles the filestore and communications in response to system calls
 less::
 	两个功能：：
 		文件在一页上显示完, 用q停止
