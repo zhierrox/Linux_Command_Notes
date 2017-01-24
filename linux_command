@@ -1,0 +1,206 @@
+less::
+	两个功能：：
+		文件在一页上显示完, 用q停止
+		"/" + 关键字实现搜索， 按"n"，跳到下一个， 例如：：less science.txt， /sci
+		退出时已经显示的内容会消失
+more：：
+	逐步显示文件， 退出用q， 退出时已经显示的内容不会消失
+cp：：
+	cp 从文件1 到 文件2
+rm::
+	rmdir 删除文件夹
+head::
+	head 显示文件头， tail显示文件尾
+grep::
+	grep -i(ignore大小写)（v not match的行）(n 显示行号）（c 显示行数）（参数可连用，例如 -ivc） 关键字 文件
+wc::
+	(word count) wc -(l 行数)（w单词数）（c字符数） 文件
+>::
+	command > 输出到 文件
+>>::
+	command >> 追加输出到文件
+>::
+	某些command(例如sort) < 从文件输入 > 再输出到文件
+cat::
+	concatenate三个功能：：
+		创建文件并写入内容：：cat > 文件； cat >> 文件;将会出现新行，用于输入或追加输入
+		显示文件内容::cat file1
+		拼接文件内容::cat file1 file2
+more::
+	显示文件：：more file
+who::
+	显示目前登入系统的用户信息
+	直接：： who
+|::
+	command(输出) | command（作为输入, 再输出） | command（作为输入, 再输出）... 
+	例如 cat 1.txt 3.txt | sort | grep -in file > 4.txt
+Wildcards 通配符::
+	"*"::匹配多个字符
+		例如：：ls list*
+	"?"::匹配一个字符
+		例如：：ls ?ouse (匹配house and mouse， 但不匹配grouse)
+文件命名：：用下划线不用空格， 文件名以小写字母开头
+man：：
+	 manual详细手册：：
+	 	例如：：man wc
+whatis::
+	whatis简要手册：：
+		例如：：whatis wc
+apropos：：
+	关于的意思， 查找关键字描述的命令apropos keyword：：
+		例如：：apropos copy
+ls::
+	-l：：
+		列出所有属性：：读写权限（user group other） 作者 大小 创建日期 文件名
+		r: 读， w: 写， x： 可执行 （777所有用户可以读写执行）
+		例如 -rwxrw-r 1 ee51ab ......
+	-a::列出隐藏文件
+	-lag::列出所有（包括隐藏文件）详情
+chmod::
+	改变文件权限：：u(user), g(group), o(other), a(all), +(添加权限)， -（移除权限）
+	例如：：chmod go-rwx file1 （g和o， 移除rwx权限）
+	chmod a+rw file1（所有添加rw权限）
+ps::
+	查看进程：：例如 ps -l
+	ps PID 查看进程
+sleep::
+	sleep 秒数， 光标暂停多少秒（用）（用ctrl + z 转移到后台运行）
+	sleep 10 &， 表示后台运行， 返回（[4]（当前第几个后台任务） 15133（进程号））， 结束时，返回done
+bg::
+	查看后台运行的任务
+jobs::
+	列出所有running, backgrounded or suspended的进程，且带有job号
+	job号前要加%， process号不用加
+	例如：：jobs
+fg：：
+	foreground， 重启悬挂的进程（suspended）
+	例如fg %1
+kill::
+	三种方法：：
+		ctrl + c
+		kill + %jobnumber
+		kill + PID
+ps::
+	process status, ps -l可以列出每个进程详情
+	用"-9"强制kill::例如kill -9 20077
+	not possible to kill off other users' processes !!!
+quota::
+	每个用户分配的磁盘大小：：quota -V
+df::
+	显示用了多少磁盘，剩下多少磁盘：：df .
+du::
+	列出当前文件夹下， 每个文件或文件夹的大小
+	-s::表示只显示当前文件夹下的total size
+	*::表示所有文件和目录
+gzip::
+	压缩单个文件：：例如：：gzip science.txt， 原文件多一个后缀.gz， 不会增添文件数
+	压缩多个文件：：例如：：zip 压缩文件名.zip 多个要压缩的文件
+gunzip::
+	解压单个文件：：例如：：gunzip scientce.txt 恢复到原文件， 不会增添文件数
+	解压多个文件：：例如：：unzip 要解压的文件 会增添文件数
+tar::
+	提取tar文件：：例如：：tar -xvf units-1.74.tar
+zcat::
+	读取压缩了的文件：：zcat science.txt.gz
+	内容滚动太快， 用：：zcat science.txt.gz | less
+file::
+	列出当前目录的文件类型：：file *
+diff::
+	比较两个文件不同的地方：：diff file1 file2
+	"<"表示文件1， ">"表示文件2
+find：：
+	查找文件：：find 目录 查找属性 属性 后续操作
+	例如：：
+		find . -name "*.txt" -print
+		find . -size +1M -ls(加号表示超过)
+history::
+	列出输入的命令历史
+	例如：：history 3， 不同shell不同命令
+	"!!", "!-3", "!5", "!grep"
+	设置history缓存大小：：set history=100
+wget::
+	从网上下载, 例如：：
+	Download a single file from the Internet
+		wget http://example.com/file.iso
+	Download multiple URLs with wget. Put the list of URLs in another text file on separate lines and pass it to wget.
+		wget --input list-of-file-urls.txt
+software_install::
+	步骤：：
+	1， Locate and download the source code (which is usually compressed)
+	2， Unpack the source code
+		先gunzip, 再tar -xvf
+	3， Set paths to the installation directory
+		运行configure
+	4， Compile the code
+		运行make
+	5， Install the resulting executable
+		运行make install
+	6， 清除多余文件
+		运行make clean， strip 可执行文件
+make::
+	Makefile保存了一系列编译信息
+	"./configure"配置安装目录， 生成Makefile
+		--prefix documentation, data and configuration files
+		--exec-prefix files such as executables
+		例如：：./configure --prefix=$HOME/units174
+	make编译 / make check（查看编译成功与否）
+	make install 安装
+	make clean 删除中间文件
+清除多余文件：：
+	对bin的可执行文件，消除debug, 缩小文件
+	例如：：strip units
+	可通过file查看结果， not stripped 或 stripped
+	可在安装时一次完成：： make install-strip
+"$HOME"::
+	用"~"表示， 可用"$HOME"得到
+..::
+	逐层显示父目录../../units174/
+安装目录：：
+	bin：：The binary executables
+		执行：：./units
+	info：：GNU info formatted documentation
+		读取info文件：：info --file=units.info 在infofolder
+	man：：Man pages
+	share：：Shared data files
+环境变量：：
+	环境变量用大写， shell变量用小写
+	$OSTYPE (operating system)
+	$USER (your login name)
+	$HOME (the path name of your home directory)
+	$HOST (the name of the computer you are using)
+	$ARCH (the architecture of the computers processor)
+	$DISPLAY (the name of the computer screen to display X windows)
+	$PRINTER (the default printer to send print jobs)
+	$PATH (the directories the shell should search to find a command)
+env::
+	env显示所有环境变量
+	printenv：：显示所有环境变量：：例如：：printenv | less
+	setenv：：设置环境变量
+	unsetenv：：unset环境变量
+shell Variables::
+	不同shell不同，和环境变量相似，但全是小写
+	echo $history：：how many shell commands to save, allow the 		user to scroll back
+	cwd (your current working directory)
+	home (the path name of your home directory)
+	path (the directories the shell should search to find a 	  command)
+	prompt (the text string used to prompt for interactive 			commands shell your login shell)
+set::
+	设置环境变量， 显示所有环境变量
+	例如：：set | less
+	设置变量属性：：set history = 200
+设置环境变量：：
+	每次登录, 系统在home目录找初始化文件（initialisation files）
+	初始化文件：：例如：：.profile, .login, .cshrc,...不同系统， 文件名不同
+	命令原理：：输入命令，然后系统在初始化文件中查找命令的bin路径
+	第一步：：打开初始化文件：：例如：：nedit ~/.cshrc
+	第二步：：设置PATH（$path 代表 this）
+		一次设置：：
+			重启后消失，且只有当前窗口有效：：set path = ($path ~/units174/bin)
+		永久设置：：设置初始化文件：：例如：：在PATH添加"：bin_folder_path", 
+				或者在文件末尾添加set path = ($path ~/units174/bin)
+	第三步：：保存，重新加载文件：：例如：：source .cshrc
+sed::
+	Stream EDitor， 以行为单位处理文件， 替换、删除、新增、选取等
+	格式：： sed [-nefri] "command" 输入文件
+	例如：：
+	sed -n '/\$/p'ab #查询包括关键字$所在所有行，使用反斜线\屏蔽特殊含义
